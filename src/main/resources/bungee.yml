@@ -1,0 +1,4 @@
+name: command-passthrough
+author: mooziii
+version: 1.0.0
+main: me.obsilabor.commandpassthrough.waterfall.Waterfall
