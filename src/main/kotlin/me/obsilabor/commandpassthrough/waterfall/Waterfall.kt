@@ -26,8 +26,10 @@ class Waterfall : Plugin(), Listener {
         val keys = ConfigManager.config.commandMap.keys
         keys.forEach {
             if (command.startsWith(it, true)) {
+                val targetServer = ConfigManager.config.commandMap[it]
+                if (player.server.info.name.lowercase() == targetServer?.lowercase()) return
                 event.isCancelled = true
-                player.connect(proxy.getServerInfo(ConfigManager.config.commandMap[it]))
+                player.connect(proxy.getServerInfo(targetServer))
                 proxy.scheduler.schedule(this, {
                     player.server.sendData(Common.CHANNEL, command.encodeToByteArray())
                 }, 500, TimeUnit.MILLISECONDS)

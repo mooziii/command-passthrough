@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 @Plugin(
     id = "command_passthrough",
     name = "Command Passthrough",
-    version = "1.0.0",
+    version = "1.0.2",
     authors = ["mooziii"]
 )
 class Velocity @Inject constructor(
@@ -40,7 +40,9 @@ class Velocity @Inject constructor(
             val keys = ConfigManager.config.commandMap.keys
             keys.forEach {
                 if (command.startsWith(it, true)) {
-                    player.createConnectionRequest(proxy.getServer(ConfigManager.config.commandMap[it]).orElseGet(null) ?: return).connect()
+                    val targetServer = ConfigManager.config.commandMap[it]
+                    if (player.currentServer.get().serverInfo.name.lowercase() == targetServer?.lowercase()) return
+                    player.createConnectionRequest(proxy.getServer(targetServer).orElseGet(null) ?: return).connect()
                     proxy.scheduler.buildTask(this) {
                         player.currentServer.ifPresent {server ->
                             server.sendPluginMessage(channelId, command.encodeToByteArray())
