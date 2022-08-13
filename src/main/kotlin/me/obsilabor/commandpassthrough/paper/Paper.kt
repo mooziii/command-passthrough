@@ -12,7 +12,6 @@ import org.bukkit.plugin.messaging.PluginMessageListener
 
 class Paper : JavaPlugin(), PluginMessageListener {
     override fun onEnable() {
-        ConfigManager.config
         Bukkit.getMessenger().registerIncomingPluginChannel(this, Common.CHANNEL, this)
     }
 
