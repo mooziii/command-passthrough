@@ -2,6 +2,8 @@
 
 A plugin that allows you to configure certain commands that will be executed on another sub-server
 
+![Example](https://i.imgur.com/x83poAD.png)
+
 The plugin works on the following proxies:
 
 - [BungeeCord](https://www.spigotmc.org/wiki/bungeecord/)
